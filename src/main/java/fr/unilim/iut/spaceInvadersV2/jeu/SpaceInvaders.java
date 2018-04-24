@@ -28,6 +28,13 @@ public class SpaceInvaders {
         this.vaisseau = new Vaisseau(x,y);
 	}
     
+    public void deplacerVaisseauVersLaDroite() {
+    	
+    	if(this.vaisseau.abscisse() < (this.longueur -1)) {
+    		this.vaisseau.seDeplacerVersLaDroite();	
+    	}
+	}
+    
     public String recupererEspaceJeuDansChaineASCII() {
 		StringBuilder espaceDeJeu = new StringBuilder();
         

@@ -83,4 +83,43 @@ public class SpaceInvadersTest {
 		}
 			
 	}
+	
+	@Test
+	public void test_VaisseauAvance_DeplacerVaisseauVersLaDroite() {
+		spaceInvaders.positionnerUnNouveauVaisseau(7,9);
+
+		spaceInvaders.deplacerVaisseauVersLaDroite();
+		
+		assertEquals("" + 
+		"...............\n" + 
+		"...............\n" +
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"........V......\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_VaisseauImmobile_DeplacerVaisseauVersLaDroite() {
+		
+		spaceInvaders.positionnerUnNouveauVaisseau(14,9);
+
+		spaceInvaders.deplacerVaisseauVersLaDroite();
+		
+		assertEquals("" + 
+		"...............\n" + 
+		"...............\n" +
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"..............V\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+	}
 }

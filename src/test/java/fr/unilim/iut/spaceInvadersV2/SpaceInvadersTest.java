@@ -122,4 +122,44 @@ public class SpaceInvadersTest {
 		"...............\n" + 
 		"..............V\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
 	}
+	
+	@Test
+	public void test_VaisseauAvance_DeplacerVaisseauVersLaGauche() {
+		
+		spaceInvaders.positionnerUnNouveauVaisseau(7,9);
+
+		spaceInvaders.deplacerVaisseauVersLaGauche();
+		
+		assertEquals("" + 
+		"...............\n" + 
+		"...............\n" +
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"......V........\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_VaisseauImmobile_DeplacerVaisseauVersLaGauche() {
+		
+		spaceInvaders.positionnerUnNouveauVaisseau(0,9);
+
+		spaceInvaders.deplacerVaisseauVersLaGauche();
+		
+		assertEquals("" + 
+		"...............\n" + 
+		"...............\n" +
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"...............\n" + 
+		"V..............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+	}
 }

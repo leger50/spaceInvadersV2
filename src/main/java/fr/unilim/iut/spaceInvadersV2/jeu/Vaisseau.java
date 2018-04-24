@@ -20,7 +20,10 @@ public class Vaisseau {
 
 	public void seDeplacerVersLaDroite() {
 		this.x++;
-		
+	}
+	
+	public void seDeplacerVersLaGauche() {
+		this.x--;
 	}
 
 }

@@ -28,6 +28,12 @@ public class SpaceInvaders {
         this.vaisseau = new Vaisseau(x,y);
 	}
     
+    public void deplacerVaisseauVersLaGauche() {
+    	if(this.vaisseau.abscisse() > 0) {
+    		this.vaisseau.seDeplacerVersLaGauche();
+    	}
+	}
+    
     public void deplacerVaisseauVersLaDroite() {
     	
     	if(this.vaisseau.abscisse() < (this.longueur -1)) {

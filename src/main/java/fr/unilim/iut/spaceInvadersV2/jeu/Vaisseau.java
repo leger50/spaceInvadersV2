@@ -1,4 +1,4 @@
-package fr.unilim.iut.spaceInvadersV2;
+package fr.unilim.iut.spaceInvadersV2.jeu;
 
 public class Vaisseau {
 	

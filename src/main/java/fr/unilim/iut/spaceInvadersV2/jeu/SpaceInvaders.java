@@ -54,11 +54,6 @@ public class SpaceInvaders {
         
         return espaceDeJeu.toString();
 	}
-    
-    @Override
-    public String toString() {
-    	return recupererEspaceJeuDansChaineASCII();
-    }
 
 	private char recupererMarqueDeLaPosition(int x, int y) {
 		char marque;

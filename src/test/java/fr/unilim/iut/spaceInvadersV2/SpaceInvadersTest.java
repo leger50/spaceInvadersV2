@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.unilim.iut.spaceInvadersV2.jeu.SpaceInvaders;
+import fr.unilim.iut.spaceInvadersV2.utils.DebordementEspaceJeuException;
 import fr.unilim.iut.spaceInvadersV2.utils.HorsEspaceJeuException;
 
 public class SpaceInvadersTest {
@@ -177,5 +178,23 @@ public class SpaceInvadersTest {
 		"...............\n" + 
 		".......VVV.....\n" + 
 		".......VVV.....\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_UnNouveauVaisseauPositionneDansEspaceJeuMaisAvecDimensionTropGrande_DoitLeverUneExceptionDeDebordement() {
+		
+		try {
+			spaceInvaders.positionnerUnNouveauVaisseau(9,2,7,9);
+			fail("Dépassement du vaisseau à droite en raison de sa longueur trop importante : devrait déclencher une exception DebordementEspaceJeuException");
+		} catch (final DebordementEspaceJeuException e) {
+		}
+		
+		
+		try {
+			spaceInvaders.positionnerUnNouveauVaisseau(3,4,7,1);
+			fail("Dépassement du vaisseau vers le haut en raison de sa hauteur trop importante : devrait déclencher une exception DebordementEspaceJeuException");
+		} catch (final DebordementEspaceJeuException e) {
+		}
+			
 	}
 }

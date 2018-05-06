@@ -19,29 +19,27 @@ public class SpaceInvaders {
 		this.hauteur = hauteur;
 	}
 
-	public void positionnerUnNouveauVaisseau(int longueur, int hauteur, int x, int y) {
-		if (!estDansEspaceJeu(x, y)) {
+	public void positionnerUnNouveauVaisseau(Dimension dimension, Position position) {
+		
+		int x = position.abscisse();
+		int y = position.ordonnee();
+		
+		if (!this.estDansEspaceJeu(x, y)) {
 			throw new HorsEspaceJeuException("La position du vaisseau est en dehors de l'espace jeu");
 		}
 
-		if (!estDansEspaceJeu(x + longueur - 1, y)) {
-			throw new DebordementEspaceJeuException(
-					"Le vaisseau déborde de l'espace jeu vers la droite à cause de sa longueur");
-		}
-		if (!estDansEspaceJeu(x, y - hauteur + 1)) {
-			throw new DebordementEspaceJeuException(
-					"Le vaisseau déborde de l'espace jeu vers le bas à cause de sa hauteur");
-		}
-
-		this.vaisseau = new Vaisseau(longueur, hauteur);
-		this.vaisseau.positionner(x, y);
-
-	}
-
-	public void positionnerUnNouveauVaisseau(Dimension dimension, Position position) {
+		int longueurVaisseau = dimension.longueur();
+		int hauteurVaisseau = dimension.hauteur();
 		
-		this.positionnerUnNouveauVaisseau(dimension.longueur(), dimension.hauteur(), position.abscisse(),
-				position.ordonnee());
+		if (!this.estDansEspaceJeu(x + longueurVaisseau - 1, y)) {
+			throw new DebordementEspaceJeuException("Le vaisseau déborde de l'espace jeu vers la droite à cause de sa longueur");
+		}
+		if (!this.estDansEspaceJeu(x, y - hauteurVaisseau + 1)) {
+			throw new DebordementEspaceJeuException("Le vaisseau déborde de l'espace jeu vers le bas à cause de sa hauteur");
+		}
+
+		this.vaisseau = new Vaisseau(longueurVaisseau, hauteurVaisseau);
+		this.vaisseau.positionner(x, y);
 
 	}
 

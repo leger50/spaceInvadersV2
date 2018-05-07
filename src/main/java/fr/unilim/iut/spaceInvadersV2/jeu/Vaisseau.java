@@ -36,16 +36,16 @@ public class Vaisseau {
 		return (this.abscisseLaPlusAGauche() <= x) && (x <= this.abscisseLaPlusADroite());
 	}
 
-	public int ordonneeLaPlusHaute() {
+	public int ordonneeLaPlusBasse() {
 		return this.origine.ordonnee() - this.dimension.hauteur() + 1;
 	}
 
-	public int ordonneeLaPlusBasse() {
+	public int ordonneeLaPlusHaute() {
 		return this.origine.ordonnee();
 	}
 
 	private boolean estOrdonneeCouverte(int y) {
-		return (this.ordonneeLaPlusHaute() <= y) && (y <= this.ordonneeLaPlusBasse());
+		return (this.ordonneeLaPlusBasse() <= y) && (y <= this.ordonneeLaPlusHaute());
 	}
 
 	public boolean occupeLaPosition(int x, int y) {

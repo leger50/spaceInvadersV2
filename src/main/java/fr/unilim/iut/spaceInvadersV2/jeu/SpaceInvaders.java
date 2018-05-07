@@ -17,7 +17,7 @@ public class SpaceInvaders implements Jeu {
 		this.hauteur = hauteur;
 	}
 
-	public void positionnerUnNouveauVaisseau(Dimension dimension, Position position) {
+	public void positionnerUnNouveauVaisseau(Dimension dimension, Position position, int vitesse) {
 
 		int x = position.abscisse();
 		int y = position.ordonnee();
@@ -38,21 +38,27 @@ public class SpaceInvaders implements Jeu {
 					"Le vaisseau déborde de l'espace jeu vers le bas à cause de sa hauteur");
 		}
 
-		this.vaisseau = new Vaisseau(longueurVaisseau, hauteurVaisseau);
-		this.vaisseau.positionner(x, y);
-
+		this.vaisseau = new Vaisseau(dimension,position,vitesse);
 	}
 
 	public void deplacerVaisseauVersLaGauche() {
 		if (this.vaisseau.abscisseLaPlusAGauche() > 0) {
 			this.vaisseau.seDeplacerVersLaGauche();
+			
+			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusAGauche(), this.vaisseau.ordonneeLaPlusHaute())) {
+				this.vaisseau.positionner(0, this.vaisseau.ordonneeLaPlusHaute());
+			}
 		}
 	}
 
 	public void deplacerVaisseauVersLaDroite() {
 
-		if (vaisseau.abscisseLaPlusADroite() < (longueur - 1)) {
+		if (this.vaisseau.abscisseLaPlusADroite() < (longueur - 1)) {
 			this.vaisseau.seDeplacerVersLaDroite();
+			
+			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusADroite(), this.vaisseau.ordonneeLaPlusHaute())) {
+				this.vaisseau.positionner(longueur - this.vaisseau.longueur(), this.vaisseau.ordonneeLaPlusHaute());
+			}
 		}
 	}
 
@@ -100,7 +106,7 @@ public class SpaceInvaders implements Jeu {
 
 	public void initialiserJeu() {
 		this.positionnerUnNouveauVaisseau(new Dimension(Constantes.VAISSEAU_LONGUEUR, Constantes.VAISSEAU_HAUTEUR),
-				new Position(this.longueur / 2, this.hauteur - 1));
+				new Position(this.longueur / 2, this.hauteur - 1), Constantes.VAISSEAU_VITESSE);
 	}
 
 	private void deplacerVaisseau(Commande commandeUser) {

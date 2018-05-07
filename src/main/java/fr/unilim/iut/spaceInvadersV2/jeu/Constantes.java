@@ -11,5 +11,6 @@ public class Constantes {
 
 	public static final int VAISSEAU_LONGUEUR = 30;
 	public static final int VAISSEAU_HAUTEUR = 20;
+	public static final int VAISSEAU_VITESSE = 5;
 
 }

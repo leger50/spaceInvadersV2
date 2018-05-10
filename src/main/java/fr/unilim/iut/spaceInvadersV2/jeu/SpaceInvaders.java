@@ -13,6 +13,8 @@ public class SpaceInvaders implements Jeu {
 
 	Vaisseau vaisseau;
 	Missile missile;
+	
+	Envahisseur envahisseur;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
@@ -106,6 +108,43 @@ public class SpaceInvaders implements Jeu {
 		return this.missile;
 	}
 	
+	public void positionnerUnNouveauEnvahisseur(Dimension dimension, Position position, int vitesse) {
+		
+		int x = position.abscisse();
+		int y = position.ordonnee();
+
+		if (!this.estDansEspaceJeu(x, y)) {
+			throw new HorsEspaceJeuException("La position de l'envahisseur est en dehors de l'espace jeu");
+		}
+
+		int longueurEnvahisseur = dimension.longueur();
+		int hauteurEnvahisseur = dimension.hauteur();
+
+		if (!this.estDansEspaceJeu(x + longueurEnvahisseur - 1, y)) {
+			throw new DebordementEspaceJeuException(
+					"L'envahisseur déborde de l'espace jeu vers la droite à cause de sa longueur");
+		}
+		if (!this.estDansEspaceJeu(x, y - hauteurEnvahisseur + 1)) {
+			throw new DebordementEspaceJeuException(
+					"L'envahisseur déborde de l'espace jeu vers le bas à cause de sa hauteur");
+		}
+
+		this.envahisseur = new Envahisseur(dimension, position, vitesse);
+		
+	}
+	
+	private boolean aUnEnvahisseurQuiOccupeLaPosition(int x, int y) {
+		return this.aUnEnvahisseur() && this.envahisseur.occupeLaPosition(x, y);
+	}
+
+	public boolean aUnEnvahisseur() {
+		return this.envahisseur != null;
+	}
+
+	public Envahisseur recupererEnvahisseur() {
+		return this.envahisseur;
+	}
+	
 	private boolean estDansEspaceJeu(int x, int y) {
 		return ((x >= 0) && (x < this.longueur)) && ((y >= 0) && (y < this.hauteur));
 	}
@@ -169,6 +208,8 @@ public class SpaceInvaders implements Jeu {
 			marque = Constantes.MARQUE_VAISSEAU;
 		} else if (this.aUnMissileQuiOccupeLaPosition(x, y)) {
 			marque = Constantes.MARQUE_MISSILE;
+		} else if(this.aUnEnvahisseurQuiOccupeLaPosition(x, y)) {
+			marque = Constantes.MARQUE_ENVAHISSEUR;
 		} else {
 			marque = Constantes.MARQUE_VIDE;
 		}

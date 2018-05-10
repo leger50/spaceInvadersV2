@@ -196,6 +196,10 @@ public class SpaceInvaders implements Jeu {
 			this.deplacerMissile();
 		}
 		
+		if(this.aUnEnvahisseur()) {
+			this.deplacerEnvahisseur();
+		}
+		
 		this.deplacerVaisseau(commandeUser);
 		
 

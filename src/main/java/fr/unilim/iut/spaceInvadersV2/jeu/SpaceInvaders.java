@@ -45,7 +45,7 @@ public class SpaceInvaders implements Jeu {
 
 	public void deplacerVaisseauVersLaGauche() {
 		if (this.vaisseau.abscisseLaPlusAGauche() > 0) {
-			this.vaisseau.seDeplacerVersLaGauche();
+			this.vaisseau.deplacerHorizontalementVers(Direction.GAUCHE);
 
 			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusAGauche(), this.vaisseau.ordonneeLaPlusHaute())) {
 				this.vaisseau.positionner(0, this.vaisseau.ordonneeLaPlusHaute());
@@ -56,7 +56,7 @@ public class SpaceInvaders implements Jeu {
 	public void deplacerVaisseauVersLaDroite() {
 
 		if (this.vaisseau.abscisseLaPlusADroite() < (longueur - 1)) {
-			this.vaisseau.seDeplacerVersLaDroite();
+			this.vaisseau.deplacerHorizontalementVers(Direction.DROITE);
 
 			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusADroite(), this.vaisseau.ordonneeLaPlusHaute())) {
 				this.vaisseau.positionner(longueur - this.vaisseau.longueur(), this.vaisseau.ordonneeLaPlusHaute());
@@ -104,7 +104,7 @@ public class SpaceInvaders implements Jeu {
 		return ((x >= 0) && (x < this.longueur)) && ((y >= 0) && (y < this.hauteur));
 	}
 
-	public Vaisseau getVaisseau() {
+	public Vaisseau recupererLeVaisseau() {
 		return this.vaisseau;
 	}
 
@@ -126,7 +126,7 @@ public class SpaceInvaders implements Jeu {
 		return this.missile != null;
 	}
 
-	public Missile getMissile() {
+	public Missile recupererUnMissile() {
 		return this.missile;
 	}
 
@@ -148,7 +148,7 @@ public class SpaceInvaders implements Jeu {
 	public void evoluer(Commande commandeUser) {
 		this.deplacerVaisseau(commandeUser);
 
-		if (commandeUser.tir) {
+		if (commandeUser.tir && !this.aUnMissile()) {
 			this.tirerUnMissile(
 					new Dimension(Constantes.MISSILE_VAISSEAU_LONGUEUR, Constantes.MISSILE_VAISSEAU_HAUTEUR),
 					Constantes.MISSILE_VAISSEAU_VITESSE);

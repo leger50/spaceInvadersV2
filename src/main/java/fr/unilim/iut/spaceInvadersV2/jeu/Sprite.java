@@ -48,12 +48,12 @@ public abstract class Sprite {
 		return (this.estAbscisseCouverte(x) && this.estOrdonneeCouverte(y));
 	}
 
-	public void seDeplacerVersLaDroite() {
-		this.origine.changerAbscisse(this.origine.abscisse() +vitesse);
+	public void deplacerHorizontalementVers(Direction direction) {
+		this.origine.changerAbscisse(this.origine.abscisse() + direction.valeur() * this.vitesse);
 	}
-
-	public void seDeplacerVersLaGauche() {
-		this.origine.changerAbscisse(this.origine.abscisse() -vitesse);
+	
+	public void deplacerVerticalementVers(Direction direction) {
+		this.origine.changerOrdonnee(this.origine.ordonnee() + direction.valeur() * this.vitesse);
 	}
 
 	public int hauteur() {

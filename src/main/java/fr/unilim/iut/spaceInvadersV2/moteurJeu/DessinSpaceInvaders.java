@@ -23,11 +23,11 @@ public class DessinSpaceInvaders implements DessinJeu{
 	public void dessiner(BufferedImage image) {
 
 		if(this.spaceInvaders.aUnVaisseau()) {
-			this.dessinerUnVaisseau(this.spaceInvaders.getVaisseau(), image);
+			this.dessinerUnVaisseau(this.spaceInvaders.recupererLeVaisseau(), image);
 		}
 		
 		if(this.spaceInvaders.aUnMissile()) {
-			this.dessinerUnMissile(this.spaceInvaders.getMissile(), image);;
+			this.dessinerUnMissile(this.spaceInvaders.recupererUnMissile(), image);;
 		}
 		
 	}
@@ -44,7 +44,7 @@ public class DessinSpaceInvaders implements DessinJeu{
 	private void dessinerUnMissile(Missile missile, BufferedImage image) {
 		Graphics2D dessinMissile = (Graphics2D) image.getGraphics();
 
-		dessinMissile.setColor(Color.red);
+		dessinMissile.setColor(Color.blue);
 		dessinMissile.fillRect(missile.abscisseLaPlusAGauche(), missile.ordonneeLaPlusBasse(),
 				missile.longueur(), missile.hauteur());
 

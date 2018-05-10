@@ -260,4 +260,50 @@ public class SpaceInvadersTest {
 	   spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 1);
 	   spaceInvaders.tirerUnMissile(new Dimension(7,9),1);
 	}
+	
+	@Test
+	public void test_MissileAvanceAutomatiquement_ApresTirDepuisLeVaisseau() {
+
+	   spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 2);
+	   spaceInvaders.tirerUnMissile(new Dimension(3,2),2);
+
+	   spaceInvaders.deplacerMissile();
+	   
+       assertEquals("" + 
+       "...............\n" + 
+       "...............\n" +
+       "...............\n" + 
+       "...............\n" + 
+       ".......MMM.....\n" + 
+       ".......MMM.....\n" + 
+       "...............\n" + 
+       "...............\n" + 
+       ".....VVVVVVV...\n" + 
+       ".....VVVVVVV...\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+   }
+	
+	@Test
+    public void test_MissileDisparait_QuandIlCommenceASortirDeEspaceJeu() {
+
+	   spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 1);
+	   
+	   spaceInvaders.tirerUnMissile(new Dimension(3,2),1);
+	   for (int i = 1; i <=6 ; i++) {
+		   spaceInvaders.deplacerMissile();
+	   }
+	   
+	   spaceInvaders.deplacerMissile();
+	   
+       assertEquals("" +
+       "...............\n" + 
+       "...............\n" +
+       "...............\n" + 
+       "...............\n" +
+       "...............\n" +
+       "...............\n" + 
+       "...............\n" +
+       "...............\n" + 
+       ".....VVVVVVV...\n" + 
+       ".....VVVVVVV...\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+   }
 }

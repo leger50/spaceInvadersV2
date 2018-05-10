@@ -40,13 +40,13 @@ public class SpaceInvaders implements Jeu {
 					"Le vaisseau déborde de l'espace jeu vers le bas à cause de sa hauteur");
 		}
 
-		this.vaisseau = new Vaisseau(dimension,position,vitesse);
+		this.vaisseau = new Vaisseau(dimension, position, vitesse);
 	}
 
 	public void deplacerVaisseauVersLaGauche() {
 		if (this.vaisseau.abscisseLaPlusAGauche() > 0) {
 			this.vaisseau.seDeplacerVersLaGauche();
-			
+
 			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusAGauche(), this.vaisseau.ordonneeLaPlusHaute())) {
 				this.vaisseau.positionner(0, this.vaisseau.ordonneeLaPlusHaute());
 			}
@@ -57,7 +57,7 @@ public class SpaceInvaders implements Jeu {
 
 		if (this.vaisseau.abscisseLaPlusADroite() < (longueur - 1)) {
 			this.vaisseau.seDeplacerVersLaDroite();
-			
+
 			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusADroite(), this.vaisseau.ordonneeLaPlusHaute())) {
 				this.vaisseau.positionner(longueur - this.vaisseau.longueur(), this.vaisseau.ordonneeLaPlusHaute());
 			}
@@ -83,7 +83,7 @@ public class SpaceInvaders implements Jeu {
 
 		if (this.aUnVaisseauQuiOccupeLaPosition(x, y)) {
 			marque = Constantes.MARQUE_VAISSEAU;
-		} else if(this.aUnMissileQuiOccupeLaPosition(x, y)){
+		} else if (this.aUnMissileQuiOccupeLaPosition(x, y)) {
 			marque = Constantes.MARQUE_MISSILE;
 		} else {
 			marque = Constantes.MARQUE_VIDE;
@@ -107,22 +107,27 @@ public class SpaceInvaders implements Jeu {
 	public Vaisseau getVaisseau() {
 		return this.vaisseau;
 	}
-	
+
 	public void tirerUnMissile(Dimension dimension, int vitesse) {
-		
-		if ((this.vaisseau.hauteur() + dimension.hauteur()) > this.hauteur ) {
-			   throw new MissileException("Pas assez de hauteur libre entre le vaisseau et le haut de l'espace jeu pour tirer le missile");
+
+		if ((this.vaisseau.hauteur() + dimension.hauteur()) > this.hauteur) {
+			throw new MissileException(
+					"Pas assez de hauteur libre entre le vaisseau et le haut de l'espace jeu pour tirer le missile");
 		}
-	
-		this.missile = this.vaisseau.tirerUnMissile(dimension,vitesse);
+
+		this.missile = this.vaisseau.tirerUnMissile(dimension, vitesse);
 	}
-	
+
 	private boolean aUnMissileQuiOccupeLaPosition(int x, int y) {
 		return this.aUnMissile() && this.missile.occupeLaPosition(x, y);
 	}
 
 	public boolean aUnMissile() {
 		return this.missile != null;
+	}
+
+	public Missile getMissile() {
+		return this.missile;
 	}
 
 	public void initialiserJeu() {
@@ -142,6 +147,12 @@ public class SpaceInvaders implements Jeu {
 	@Override
 	public void evoluer(Commande commandeUser) {
 		this.deplacerVaisseau(commandeUser);
+
+		if (commandeUser.tir) {
+			this.tirerUnMissile(
+					new Dimension(Constantes.MISSILE_VAISSEAU_LONGUEUR, Constantes.MISSILE_VAISSEAU_HAUTEUR),
+					Constantes.MISSILE_VAISSEAU_VITESSE);
+		}
 
 	}
 

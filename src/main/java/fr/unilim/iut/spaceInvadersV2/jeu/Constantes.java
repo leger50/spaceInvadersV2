@@ -13,5 +13,9 @@ public class Constantes {
 	public static final int VAISSEAU_LONGUEUR = 30;
 	public static final int VAISSEAU_HAUTEUR = 20;
 	public static final int VAISSEAU_VITESSE = 5;
+	
+	public static final int MISSILE_VAISSEAU_LONGUEUR = 5;
+	public static final int MISSILE_VAISSEAU_HAUTEUR = 10;
+	public static final int MISSILE_VAISSEAU_VITESSE = 5;
 
 }

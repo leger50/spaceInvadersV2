@@ -133,6 +133,22 @@ public class SpaceInvaders implements Jeu {
 		
 	}
 	
+	public void deplacerEnvahisseur() {
+		
+		this.envahisseur.deplacerHorizontalementVers(this.envahisseur.direction());
+		
+		if(this.envahisseur.abscisseLaPlusADroite() > (this.longueur -1) || this.envahisseur.abscisseLaPlusAGauche() < 0) {
+			this.changerDirectionEnvahisseur();
+			this.envahisseur.deplacerHorizontalementVers(this.envahisseur.direction());
+		}
+		
+	}
+
+	private void changerDirectionEnvahisseur() {
+		this.envahisseur.modifierDirection();
+		this.envahisseur.deplacerHorizontalementVers(this.envahisseur.direction());
+	}
+	
 	private boolean aUnEnvahisseurQuiOccupeLaPosition(int x, int y) {
 		return this.aUnEnvahisseur() && this.envahisseur.occupeLaPosition(x, y);
 	}

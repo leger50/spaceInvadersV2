@@ -49,8 +49,8 @@ public class SpaceInvaders implements Jeu {
 		if (this.vaisseau.abscisseLaPlusAGauche() > 0) {
 			this.vaisseau.deplacerHorizontalementVers(Direction.GAUCHE);
 
-			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusAGauche(), this.vaisseau.ordonneeLaPlusHaute())) {
-				this.vaisseau.positionner(0, this.vaisseau.ordonneeLaPlusHaute());
+			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusAGauche(), this.vaisseau.ordonneeLaPlusBasse())) {
+				this.vaisseau.positionner(0, this.vaisseau.ordonneeLaPlusBasse());
 			}
 		}
 	}
@@ -60,8 +60,8 @@ public class SpaceInvaders implements Jeu {
 		if (this.vaisseau.abscisseLaPlusADroite() < (this.longueur - 1)) {
 			this.vaisseau.deplacerHorizontalementVers(Direction.DROITE);
 
-			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusADroite(), this.vaisseau.ordonneeLaPlusHaute())) {
-				this.vaisseau.positionner(this.longueur - this.vaisseau.longueur(), this.vaisseau.ordonneeLaPlusHaute());
+			if (!this.estDansEspaceJeu(this.vaisseau.abscisseLaPlusADroite(), this.vaisseau.ordonneeLaPlusBasse())) {
+				this.vaisseau.positionner(this.longueur - this.vaisseau.longueur(), this.vaisseau.ordonneeLaPlusBasse());
 			}
 		}
 	}
@@ -91,7 +91,7 @@ public class SpaceInvaders implements Jeu {
 	public void deplacerMissile() {
 		this.missile.deplacerVerticalementVers(Direction.HAUT_ECRAN);
 		
-		if(!this.estDansEspaceJeu(this.missile.abscisseLaPlusAGauche(), this.missile.ordonneeLaPlusBasse())){
+		if(!this.estDansEspaceJeu(this.missile.abscisseLaPlusAGauche(), this.missile.ordonneeLaPlusHaute())){
 			this.missile = null;
 		}
 	}

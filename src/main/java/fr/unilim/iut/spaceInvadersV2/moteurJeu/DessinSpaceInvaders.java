@@ -41,7 +41,7 @@ public class DessinSpaceInvaders implements DessinJeu{
 		Graphics2D dessinVaisseau = (Graphics2D) image.getGraphics();
 
 		dessinVaisseau.setColor(Color.gray);
-		dessinVaisseau.fillRect(vaisseau.abscisseLaPlusAGauche(), vaisseau.ordonneeLaPlusBasse(),
+		dessinVaisseau.fillRect(vaisseau.abscisseLaPlusAGauche(), vaisseau.ordonneeLaPlusHaute(),
 				vaisseau.longueur(), vaisseau.hauteur());
 
 	}
@@ -50,7 +50,7 @@ public class DessinSpaceInvaders implements DessinJeu{
 		Graphics2D dessinMissile = (Graphics2D) image.getGraphics();
 
 		dessinMissile.setColor(Color.blue);
-		dessinMissile.fillRect(missile.abscisseLaPlusAGauche(), missile.ordonneeLaPlusBasse(),
+		dessinMissile.fillRect(missile.abscisseLaPlusAGauche(), missile.ordonneeLaPlusHaute(),
 				missile.longueur(), missile.hauteur());
 
 	}
@@ -59,7 +59,7 @@ public class DessinSpaceInvaders implements DessinJeu{
 		Graphics2D dessinVaisseau = (Graphics2D) image.getGraphics();
 
 		dessinVaisseau.setColor(Color.red);
-		dessinVaisseau.fillRect(envahisseur.abscisseLaPlusAGauche(), envahisseur.ordonneeLaPlusBasse(),
+		dessinVaisseau.fillRect(envahisseur.abscisseLaPlusAGauche(), envahisseur.ordonneeLaPlusHaute(),
 				envahisseur.longueur(), envahisseur.hauteur());
 
 	}

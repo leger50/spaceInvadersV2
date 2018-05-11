@@ -32,16 +32,16 @@ public abstract class Sprite {
 		return (this.abscisseLaPlusAGauche() <= x) && (x <= this.abscisseLaPlusADroite());
 	}
 
-	public int ordonneeLaPlusBasse() {
+	public int ordonneeLaPlusHaute() {
 		return this.origine.ordonnee() - this.dimension.hauteur() + 1;
 	}
 
-	public int ordonneeLaPlusHaute() {
+	public int ordonneeLaPlusBasse() {
 		return this.origine.ordonnee();
 	}
 
 	private boolean estOrdonneeCouverte(int y) {
-		return (this.ordonneeLaPlusBasse() <= y) && (y <= this.ordonneeLaPlusHaute());
+		return (this.ordonneeLaPlusHaute() <= y) && (y <= this.ordonneeLaPlusBasse());
 	}
 
 	public boolean occupeLaPosition(int x, int y) {

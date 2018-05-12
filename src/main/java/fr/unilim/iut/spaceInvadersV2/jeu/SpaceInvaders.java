@@ -207,7 +207,7 @@ public class SpaceInvaders implements Jeu {
 
 	@Override
 	public boolean etreFini() {
-		return false;
+		return this.aUnMissile() && this.aUnEnvahisseur() && Collision.detecterCollision(this.missile, this.envahisseur);
 	}
 	
 	public String recupererEspaceJeuDansChaineASCII() {

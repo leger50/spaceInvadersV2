@@ -8,8 +8,8 @@ public class Constantes {
 	public static final char MARQUE_MISSILE = 'M';
 	public static final char MARQUE_ENVAHISSEUR = 'E';
 
-	public static final int ESPACEJEU_LONGUEUR = 1000;
-	public static final int ESPACEJEU_HAUTEUR = 600;
+	public static final int ESPACEJEU_LONGUEUR = 500;
+	public static final int ESPACEJEU_HAUTEUR = 200;
 
 	public static final int VAISSEAU_LONGUEUR = 50;
 	public static final int VAISSEAU_HAUTEUR = 30;

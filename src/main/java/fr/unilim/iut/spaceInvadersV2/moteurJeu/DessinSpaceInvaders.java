@@ -34,8 +34,11 @@ public class DessinSpaceInvaders implements DessinJeu{
 			}
 		}
 		
-		if(this.spaceInvaders.aUnEnvahisseur()) {
-			this.dessinerUnEnvahisseur(this.spaceInvaders.recupererEnvahisseur(), image);
+		if(this.spaceInvaders.aDesEnvahisseurs()) {
+			
+			for (final Envahisseur envahisseur : this.spaceInvaders.recupererListeEnvahisseurs()) {
+				this.dessinerUnEnvahisseur(envahisseur, image);
+			}
 		}
 		
 	}

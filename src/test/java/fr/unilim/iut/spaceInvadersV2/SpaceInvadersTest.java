@@ -494,4 +494,48 @@ public class SpaceInvadersTest {
 				".....VVV.......\n" + 
 				".....VVV.......\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
 	}
+	
+	@Test
+	public void test_PlacerPlusieursEnvahisseurSansChevauchement() {
+		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(2, 2), 1);
+		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(5, 2), 1);
+		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(8, 2), 1);
+		
+		assertEquals("" + 
+				"...............\n" + 
+				"..EE.EE.EE.....\n" +
+				"..EE.EE.EE.....\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_PlacerPlusieursEnvahisseurAvecChevauchement() {
+		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(2, 2), 1);
+		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(5, 2), 1);
+		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(6, 2), 1);
+		
+		assertEquals("" + 
+				"...............\n" + 
+				"..EE.EE........\n" +
+				"..EE.EE........\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	//TODO plusieurs envahisseur sans chevauchement
+	//TODO plusieurs envahisseur avec chevauchement
+	//TODO creer une ligne d'envahisseur
+	//TODO deplacer une ligne d'envahisseur sans demi tour
+	//TODO deplacer une ligne d'envahisseur avec demi tour
+	//TODO verifier toutes les collisions
 }

@@ -447,7 +447,29 @@ public class SpaceInvadersTest {
 		for (int i = 0; i < 5; i++) {
 			spaceInvaders.deplacerMissile();
 		}
-		System.out.println(spaceInvaders.recupererEspaceJeuDansChaineASCII());
+
 		assertTrue(spaceInvaders.etreFini());
+	}
+	
+	@Test
+	public void test_TirerPlusieursMissilesSansChevauchement() {
+		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(5, 9), 2);
+		
+		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 4);
+		spaceInvaders.deplacerMissile();
+		
+		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 4);
+		
+		assertEquals("" + 
+				"...............\n" + 
+				"...............\n" +
+				"......M........\n" + 
+				"......M........\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"......M........\n" + 
+				"......M........\n" + 
+				".....VVV.......\n" + 
+				".....VVV.......\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
 	}
 }

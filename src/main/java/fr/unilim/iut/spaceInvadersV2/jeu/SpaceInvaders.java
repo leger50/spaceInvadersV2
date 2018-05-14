@@ -91,7 +91,24 @@ public class SpaceInvaders implements Jeu {
 		}
 
 		Missile missileTire = this.vaisseau.tirerUnMissile(dimension, vitesse);
-		this.listeMissiles.add(missileTire);
+		
+		if(!this.aUnMissileQuiOccupeLEspace(missileTire)) {
+			this.listeMissiles.add(missileTire);
+		}
+	}
+
+	private boolean aUnMissileQuiOccupeLEspace(Missile missileTire) {
+		boolean missileDejaPresent = false;
+		int i = 0;
+		
+		while(i<this.listeMissiles.size() && !missileDejaPresent) {
+			if(Collision.detecterCollision(missileTire, this.listeMissiles.get(i))) {
+				missileDejaPresent = true;
+			}
+			
+			i++;
+		}
+		return missileDejaPresent;
 	}
 	
 	public void deplacerMissile() {
@@ -118,7 +135,7 @@ public class SpaceInvaders implements Jeu {
 	}
 
 	public boolean aDesMissiles() {
-		return this.listeMissiles.isEmpty();
+		return !this.listeMissiles.isEmpty();
 	}
 
 	public List<Missile> recupererListeMissiles() {
@@ -207,6 +224,7 @@ public class SpaceInvaders implements Jeu {
 			this.tirerUnMissile(
 					new Dimension(Constantes.MISSILE_VAISSEAU_LONGUEUR, Constantes.MISSILE_VAISSEAU_HAUTEUR),
 					Constantes.MISSILE_VAISSEAU_VITESSE);
+			
 		}
 		
 		if(this.aDesMissiles()) {

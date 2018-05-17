@@ -172,6 +172,15 @@ public class SpaceInvaders implements Jeu {
 		
 	}
 	
+	public void placerLigneEnvahisseurs(Dimension dimensionEnvahisseur, int vitesseEnvahisseur, int ordonneePosition, int espaceEntreEnvahisseurs) {
+		
+		int abscisseEnvahisseur = dimensionEnvahisseur.longueur() + espaceEntreEnvahisseurs;
+		
+		for(int i=0; i<(this.longueur -dimensionEnvahisseur.longueur()); i+=abscisseEnvahisseur) {
+			this.positionnerUnNouveauEnvahisseur(dimensionEnvahisseur, new Position(i, ordonneePosition), vitesseEnvahisseur);
+		}
+	}
+	
 	private boolean aUnEnvahisseurQuiOccupeLEspace(Envahisseur envahisseurAPlacer) {
 		boolean envahisseurDejaPresent = false;
 		int i = 0;
@@ -187,22 +196,25 @@ public class SpaceInvaders implements Jeu {
 	}
 	
 	public void deplacerEnvahisseur() {
+		boolean horsZone = false;
 		
 		for (Envahisseur envahisseur : this.listeEnvahisseurs) {
 			
 			envahisseur.deplacerHorizontalementVers(envahisseur.direction());
 			
 			if(envahisseur.abscisseLaPlusADroite() > (this.longueur -1) || envahisseur.abscisseLaPlusAGauche() < 0) {
-				this.changerDirectionEnvahisseur();
-				envahisseur.deplacerHorizontalementVers(envahisseur.direction());
+				horsZone = true;
 			}
-			
-		}		
+		}
+		
+		if(horsZone) {
+			this.changerDirectionEnvahisseur();
+		}
 	}
 
 	private void changerDirectionEnvahisseur() {
 		
-		for (Envahisseur envahisseur : listeEnvahisseurs) {
+		for (Envahisseur envahisseur : this.listeEnvahisseurs) {
 			envahisseur.modifierDirection();
 			envahisseur.deplacerHorizontalementVers(envahisseur.direction());
 		}
@@ -235,8 +247,8 @@ public class SpaceInvaders implements Jeu {
 		this.positionnerUnNouveauVaisseau(new Dimension(Constantes.VAISSEAU_LONGUEUR, Constantes.VAISSEAU_HAUTEUR),
 				new Position(this.longueur / 2, this.hauteur - 1), Constantes.VAISSEAU_VITESSE);
 		
-		this.positionnerUnNouveauEnvahisseur(new Dimension(Constantes.ENVAHISSEUR_LONGUEUR, Constantes.ENVAHISSEUR_HAUTEUR),
-				new Position(this.longueur / 2, Constantes.ENVAHISSEUR_HAUTEUR-1), Constantes.ENVAHISSEUR_VITESSE);
+		this.placerLigneEnvahisseurs(new Dimension(Constantes.ENVAHISSEUR_LONGUEUR, Constantes.ENVAHISSEUR_HAUTEUR), 
+				Constantes.ENVAHISSEUR_VITESSE, Constantes.ENVAHISSEUR_HAUTEUR-1, Constantes.ENVAHISSEUR_ESPACE_HORIZONTALE);
 	}
 
 	private void deplacerVaisseau(Commande commandeUser) {

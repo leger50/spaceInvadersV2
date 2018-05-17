@@ -22,5 +22,6 @@ public class Constantes {
 	public static final int ENVAHISSEUR_LONGUEUR = 20;
 	public static final int ENVAHISSEUR_HAUTEUR = 20;
 	public static final int ENVAHISSEUR_VITESSE = 4;
+	public static final int ENVAHISSEUR_ESPACE_HORIZONTALE =10;
 
 }

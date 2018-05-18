@@ -15,6 +15,6 @@ public class Main {
 
 		// classe qui lance le moteur de jeu generique
 		MoteurGraphique moteur = new MoteurGraphique(jeuSpaceInvaders, dessinSpaceInvaders);
-		moteur.lancerJeu(Constantes.ESPACEJEU_LONGUEUR, Constantes.ESPACEJEU_HAUTEUR);
+		moteur.lancerJeu(Constantes.ESPACEJEU_LONGUEUR, Constantes.ESPACEJEU_HAUTEUR + Constantes.ESPACESCORE_HAUTEUR);
 	}
 }

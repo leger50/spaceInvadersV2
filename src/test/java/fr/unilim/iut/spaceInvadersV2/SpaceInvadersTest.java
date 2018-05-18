@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import fr.unilim.iut.spaceInvadersV2.jeu.Constantes;
 import fr.unilim.iut.spaceInvadersV2.jeu.Dimension;
 import fr.unilim.iut.spaceInvadersV2.jeu.Position;
 import fr.unilim.iut.spaceInvadersV2.jeu.SpaceInvaders;
@@ -639,5 +640,24 @@ public class SpaceInvadersTest {
 				"...............\n" + 
 				".....VVV.......\n" + 
 				".....VVV.......\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_ScoreA0_DebutPartie() {
+		assertEquals(0, this.spaceInvaders.obtenirScore());
+	}
+	
+	@Test
+	public void test_ScoreAugmente_SiEnvahisseurTouche() {
+		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(5, 9), 1);
+		spaceInvaders.placerLigneEnvahisseurs(new Dimension(2, 2), 1, 1, 3);
+		
+		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 1);
+		for (int i = 0; i < 5; i++) {
+			spaceInvaders.deplacerMissile();
+			spaceInvaders.verifierCollisionsMissileEtEnvahisseur();
+		}
+		
+		assertEquals(Constantes.POINTS_PAR_ENVAHISSEUR, this.spaceInvaders.obtenirScore());
 	}
 }

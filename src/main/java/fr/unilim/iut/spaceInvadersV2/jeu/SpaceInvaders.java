@@ -15,10 +15,12 @@ public class SpaceInvaders implements Jeu {
 	private int longueur;
 	private int hauteur;
 
-	Vaisseau vaisseau;
-	List<Missile> listeMissiles;
+	private Vaisseau vaisseau;
 	
-	List<Envahisseur> listeEnvahisseurs;
+	private List<Missile> listeMissiles;
+	private List<Envahisseur> listeEnvahisseurs;
+	
+	private int score;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
@@ -26,6 +28,8 @@ public class SpaceInvaders implements Jeu {
 		
 		this.listeMissiles = new ArrayList<>();
 		this.listeEnvahisseurs = new ArrayList<>();
+		
+		this.score = 0;
 	}
 
 	public void positionnerUnNouveauVaisseau(Dimension dimension, Position position, int vitesse) {
@@ -240,6 +244,18 @@ public class SpaceInvaders implements Jeu {
 		return this.listeEnvahisseurs;
 	}
 	
+	public void augmenterScore(int pointsGagnes) {
+		if(pointsGagnes <= 0) {
+			throw new IllegalArgumentException("Points attendus doivent être supérieurs à 0");
+		}
+		
+		this.score += pointsGagnes;
+	}
+	
+	public int obtenirScore() {
+		return this.score;
+	}
+	
 	private boolean estDansEspaceJeu(int x, int y) {
 		return ((x >= 0) && (x < this.longueur)) && ((y >= 0) && (y < this.hauteur));
 	}
@@ -255,6 +271,8 @@ public class SpaceInvaders implements Jeu {
 		    	if(Collision.detecterCollision(missile, envahisseur)) {
 					iteratorMissiles.remove();
 					iteratorEnvahisseurs.remove();
+					
+					this.augmenterScore(Constantes.POINTS_PAR_ENVAHISSEUR);
 				}
 		    }
 		}

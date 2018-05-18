@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.unilim.iut.spaceInvadersV2.jeu.Dimension;
@@ -438,6 +439,7 @@ public class SpaceInvadersTest {
 		"...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
 	}
 	
+	@Ignore("La partie ne se termine plus de cette façon")
 	@Test
 	public void test_PartieTerminee_SiMissileVaisseauToucheEnvahisseur() {
 		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(3, 9), 1);
@@ -613,5 +615,29 @@ public class SpaceInvadersTest {
 				"...............\n" + 
 				"...............\n" + 
 				"...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_DisparitionMissileVaisseauEtEnvahisseurs_SiCollision() {
+		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(5, 9), 1);
+		spaceInvaders.placerLigneEnvahisseurs(new Dimension(2, 2), 1, 1, 3);
+		
+		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 1);
+		for (int i = 0; i < 5; i++) {
+			spaceInvaders.deplacerMissile();
+			spaceInvaders.verifierCollisionsMissileEtEnvahisseur();
+		}
+
+		assertEquals("" + 
+				"EE........EE...\n" + 
+				"EE........EE...\n" +
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				".....VVV.......\n" + 
+				".....VVV.......\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
 	}
 }

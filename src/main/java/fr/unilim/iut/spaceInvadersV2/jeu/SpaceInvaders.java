@@ -120,7 +120,7 @@ public class SpaceInvaders implements Jeu {
 	public void deplacerMissile() {
 		
 		for(int i=0; i<this.listeMissiles.size(); i++) {
-			this.listeMissiles.get(i).deplacerVerticalementVers(Direction.HAUT_ECRAN);
+			this.listeMissiles.get(i).deplacerVerticalementVers(this.listeMissiles.get(i).directionVerticale());
 			
 			if(!this.estDansEspaceJeu(this.listeMissiles.get(i).abscisseLaPlusAGauche(), this.listeMissiles.get(i).ordonneeLaPlusHaute())){
 				this.listeMissiles.remove(i);

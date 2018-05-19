@@ -660,4 +660,12 @@ public class SpaceInvadersTest {
 		
 		assertEquals(Constantes.POINTS_PAR_ENVAHISSEUR, this.spaceInvaders.obtenirScore());
 	}
+	
+	/*S11
+	 * TODO : refactor missile : donner direction verticale (pour les différencier)
+	 * TODO : permettre le tir à l'envahisseur
+	 * TODO : tir automatique
+	 * TODO : tir aléatoire
+	 * TODO : verifier la fin de partie (si collision entre MissileEnvahisseur et Vaisseau)
+	 */
 }

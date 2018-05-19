@@ -16,7 +16,7 @@ public class Vaisseau extends Sprite {
 		
 		Position positionOrigineMissile = this.calculerLaPositionDeTirDuMissile(dimension);
 
-		return new Missile(dimension, positionOrigineMissile, vitesse);
+		return new Missile(dimension, positionOrigineMissile, vitesse, Direction.HAUT_ECRAN);
 	}
 
 	private Position calculerLaPositionDeTirDuMissile(Dimension dimension) {

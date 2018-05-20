@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import fr.unilim.iut.spaceInvadersV2.jeu.Constantes;
 import fr.unilim.iut.spaceInvadersV2.jeu.Dimension;
+import fr.unilim.iut.spaceInvadersV2.jeu.Envahisseur;
 import fr.unilim.iut.spaceInvadersV2.jeu.Position;
 import fr.unilim.iut.spaceInvadersV2.jeu.SpaceInvaders;
 import fr.unilim.iut.spaceInvadersV2.utils.DebordementEspaceJeuException;
@@ -243,7 +244,7 @@ public class SpaceInvadersTest {
     public void test_MissileBienTireDepuisVaisseau_VaisseauLongueurImpaireMissileLongueurImpaire() {
 
 	  spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 2);
-	  spaceInvaders.tirerUnMissile(new Dimension(3,2),2);
+	  spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(3,2),2);
 
       assertEquals("" + 
       "...............\n" + 
@@ -261,16 +262,16 @@ public class SpaceInvadersTest {
 	@Test(expected = MissileException.class)
 	public void test_PasAssezDePlacePourTirerUnMissile_UneExceptionEstLevee() throws Exception { 
 	   spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 1);
-	   spaceInvaders.tirerUnMissile(new Dimension(7,9),1);
+	   spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(7,9),1);
 	}
 	
 	@Test
 	public void test_MissileAvanceAutomatiquement_ApresTirDepuisLeVaisseau() {
 
 	   spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 2);
-	   spaceInvaders.tirerUnMissile(new Dimension(3,2),2);
+	   spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(3,2),2);
 
-	   spaceInvaders.deplacerMissile();
+	   spaceInvaders.deplacerMissilesDuVaisseau();
 	   
        assertEquals("" + 
        "...............\n" + 
@@ -290,12 +291,12 @@ public class SpaceInvadersTest {
 
 	   spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 1);
 	   
-	   spaceInvaders.tirerUnMissile(new Dimension(3,2),1);
+	   spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(3,2),1);
 	   for (int i = 1; i <=6 ; i++) {
-		   spaceInvaders.deplacerMissile();
+		   spaceInvaders.deplacerMissilesDuVaisseau();
 	   }
 	   
-	   spaceInvaders.deplacerMissile();
+	   spaceInvaders.deplacerMissilesDuVaisseau();
 	   
        assertEquals("" +
        "...............\n" + 
@@ -446,9 +447,9 @@ public class SpaceInvadersTest {
 		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(3, 9), 1);
 		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(4, 1), 1);
 		
-		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 1);
+		spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1, 2), 1);
 		for (int i = 0; i < 5; i++) {
-			spaceInvaders.deplacerMissile();
+			spaceInvaders.deplacerMissilesDuVaisseau();
 		}
 
 		assertTrue(spaceInvaders.etreFini());
@@ -458,10 +459,10 @@ public class SpaceInvadersTest {
 	public void test_TirerPlusieursMissilesSansChevauchement() {
 		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(5, 9), 2);
 		
-		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 4);
-		spaceInvaders.deplacerMissile();
+		spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1, 2), 4);
+		spaceInvaders.deplacerMissilesDuVaisseau();
 		
-		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 4);
+		spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1, 2), 4);
 		
 		assertEquals("" + 
 				"...............\n" + 
@@ -480,10 +481,10 @@ public class SpaceInvadersTest {
 	public void test_TirerPlusieursMissilesAvecChevauchement() {
 		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(5, 9), 2);
 		
-		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 1);
-		spaceInvaders.deplacerMissile();
+		spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1, 2), 1);
+		spaceInvaders.deplacerMissilesDuVaisseau();
 		
-		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 1);
+		spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1, 2), 1);
 		
 		assertEquals("" + 
 				"...............\n" + 
@@ -623,9 +624,9 @@ public class SpaceInvadersTest {
 		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(5, 9), 1);
 		spaceInvaders.placerLigneEnvahisseurs(new Dimension(2, 2), 1, 1, 3);
 		
-		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 1);
+		spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1, 2), 1);
 		for (int i = 0; i < 5; i++) {
-			spaceInvaders.deplacerMissile();
+			spaceInvaders.deplacerMissilesDuVaisseau();
 			spaceInvaders.verifierCollisionsMissileEtEnvahisseur();
 		}
 
@@ -652,20 +653,92 @@ public class SpaceInvadersTest {
 		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(5, 9), 1);
 		spaceInvaders.placerLigneEnvahisseurs(new Dimension(2, 2), 1, 1, 3);
 		
-		spaceInvaders.tirerUnMissile(new Dimension(1, 2), 1);
+		spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1, 2), 1);
 		for (int i = 0; i < 5; i++) {
-			spaceInvaders.deplacerMissile();
+			spaceInvaders.deplacerMissilesDuVaisseau();
 			spaceInvaders.verifierCollisionsMissileEtEnvahisseur();
 		}
 		
 		assertEquals(Constantes.POINTS_PAR_ENVAHISSEUR, this.spaceInvaders.obtenirScore());
 	}
 	
+	@Test
+    public void test_MissileBienTireDepuisEnvahisseur_EnvahisseurLongueurImpaireMissileLongueurImpaire() {
+	  
+	  spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(7, 1), 1);
+	  
+	  Envahisseur envahisseur = spaceInvaders.recupererListeEnvahisseurs().get(0);
+	  spaceInvaders.tirerUnMissileDepuisUnEnvahisseur(envahisseur, new Dimension(1, 2), 1);
+
+      assertEquals("" + 
+      ".......EEE.....\n" + 
+      ".......EEE.....\n" +
+      "........M......\n" + 
+      "........M......\n" + 
+      "...............\n" + 
+      "...............\n" + 
+      "...............\n" + 
+      "...............\n" + 
+      "...............\n" + 
+      "...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+   }
+	
+   @Test
+   public void test_MissileAvanceAutomatiquement_ApresTirDepuisLEnvahisseur() {
+
+	  spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(7, 1), 1);
+		  
+	  Envahisseur envahisseur = spaceInvaders.recupererListeEnvahisseurs().get(0);
+	  spaceInvaders.tirerUnMissileDepuisUnEnvahisseur(envahisseur, new Dimension(1, 2), 1);
+	  
+	  spaceInvaders.deplacerMissilesDesEnvahisseurs();
+
+      assertEquals("" + 
+      ".......EEE.....\n" + 
+      ".......EEE.....\n" +
+      "...............\n" + 
+      "........M......\n" + 
+      "........M......\n" + 
+      "...............\n" + 
+      "...............\n" + 
+      "...............\n" + 
+      "...............\n" + 
+      "...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+   }
+	
+	@Test
+    public void test_MissileEnvahisseurDisparait_QuandIlCommenceASortirDeEspaceJeu() {
+
+	   spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(7, 1), 1);
+		  
+	   Envahisseur envahisseur = spaceInvaders.recupererListeEnvahisseurs().get(0);
+	   spaceInvaders.tirerUnMissileDepuisUnEnvahisseur(envahisseur, new Dimension(1, 2), 1);
+	  	   
+	   for (int i = 0; i < 7; i++) {
+		   spaceInvaders.deplacerMissilesDesEnvahisseurs();
+	   }
+	   
+	   
+       assertEquals("" +
+       ".......EEE.....\n" + 
+       ".......EEE.....\n" +
+       "...............\n" + 
+       "...............\n" + 
+       "...............\n" + 
+       "...............\n" + 
+       "...............\n" + 
+       "...............\n" + 
+       "...............\n" + 
+       "...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+   }
+	
 	/*S11
-	 * TODO : refactor missile : donner direction verticale (pour les différencier)
-	 * TODO : permettre le tir à l'envahisseur
+	 * TODO : refactor missile : donner direction verticale (pour les différencier) -> Done
+	 * TODO : permettre le tir à l'envahisseur -> Done
 	 * TODO : tir automatique
 	 * TODO : tir aléatoire
 	 * TODO : verifier la fin de partie (si collision entre MissileEnvahisseur et Vaisseau)
+	 * difficulté a - établir les tests : random pour le choix de l'envahisseur
+	 * 				- choisir une option (2 listes ou direction ?)
 	 */
 }

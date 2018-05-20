@@ -17,7 +17,9 @@ public class SpaceInvaders implements Jeu {
 
 	private Vaisseau vaisseau;
 	
-	private List<Missile> listeMissiles;
+	private List<Missile> listeMissilesVaisseau;
+	private List<Missile> listeMissilesEnvahisseurs;
+	
 	private List<Envahisseur> listeEnvahisseurs;
 	
 	private int score;
@@ -26,7 +28,9 @@ public class SpaceInvaders implements Jeu {
 		this.longueur = longueur;
 		this.hauteur = hauteur;
 		
-		this.listeMissiles = new ArrayList<>();
+		this.listeMissilesVaisseau = new ArrayList<>();
+		this.listeMissilesEnvahisseurs = new ArrayList<>();
+		
 		this.listeEnvahisseurs = new ArrayList<>();
 		
 		this.score = 0;
@@ -89,7 +93,7 @@ public class SpaceInvaders implements Jeu {
 		return this.vaisseau;
 	}
 
-	public void tirerUnMissile(Dimension dimension, int vitesse) {
+	public void tirerUnMissileDepuisVaisseau(Dimension dimension, int vitesse) {
 
 		if ((this.vaisseau.hauteur() + dimension.hauteur()) > this.hauteur) {
 			throw new MissileException(
@@ -98,17 +102,17 @@ public class SpaceInvaders implements Jeu {
 
 		Missile missileTire = this.vaisseau.tirerUnMissile(dimension, vitesse);
 		
-		if(!this.aUnMissileQuiOccupeLEspace(missileTire)) {
-			this.listeMissiles.add(missileTire);
+		if(!this.aUnMissileDuVaisseauQuiOccupeLEspace(missileTire)) {
+			this.listeMissilesVaisseau.add(missileTire);
 		}
 	}
-
-	private boolean aUnMissileQuiOccupeLEspace(Missile missileTire) {
+	
+	private boolean aUnMissileDuVaisseauQuiOccupeLEspace(Missile missileTire) {
 		boolean missileDejaPresent = false;
 		int i = 0;
 		
-		while(i<this.listeMissiles.size() && !missileDejaPresent) {
-			if(Collision.detecterCollision(missileTire, this.listeMissiles.get(i))) {
+		while(i<this.listeMissilesVaisseau.size() && !missileDejaPresent) {
+			if(Collision.detecterCollision(missileTire, this.listeMissilesVaisseau.get(i))) {
 				missileDejaPresent = true;
 			}
 			
@@ -117,35 +121,24 @@ public class SpaceInvaders implements Jeu {
 		return missileDejaPresent;
 	}
 	
-	public void deplacerMissile() {
+	public void deplacerMissilesDuVaisseau() {
 		
-		for(int i=0; i<this.listeMissiles.size(); i++) {
-			this.listeMissiles.get(i).deplacerVerticalementVers(this.listeMissiles.get(i).directionVerticale());
+		for(int i=0; i<this.listeMissilesVaisseau.size(); i++) {
+			this.listeMissilesVaisseau.get(i).deplacerVerticalementVers(Direction.HAUT_ECRAN);
 			
-			if(!this.estDansEspaceJeu(this.listeMissiles.get(i).abscisseLaPlusAGauche(), this.listeMissiles.get(i).ordonneeLaPlusHaute())){
-				this.listeMissiles.remove(i);
+			if(!this.estDansEspaceJeu(this.listeMissilesVaisseau.get(i).abscisseLaPlusAGauche(), this.listeMissilesVaisseau.get(i).ordonneeLaPlusHaute())){
+				this.listeMissilesVaisseau.remove(i);
 			}
 		}
 		
 	}
 
-	private boolean aUnMissileQuiOccupeLaPosition(int x, int y) {
-		
-		for (Missile missile : this.listeMissiles) {
-			if(missile.occupeLaPosition(x, y)) {
-				return true;
-			}
-		}
-		
-		return false;
+	public boolean aDesMissilesDuVaisseau() {
+		return !this.listeMissilesVaisseau.isEmpty();
 	}
 
-	public boolean aDesMissiles() {
-		return !this.listeMissiles.isEmpty();
-	}
-
-	public List<Missile> recupererListeMissiles() {
-		return this.listeMissiles;
+	public List<Missile> recupererListeMissilesDuVaisseau() {
+		return this.listeMissilesVaisseau;
 	}
 	
 	public void positionnerUnNouveauEnvahisseur(Dimension dimension, Position position, int vitesse) {
@@ -244,6 +237,49 @@ public class SpaceInvaders implements Jeu {
 		return this.listeEnvahisseurs;
 	}
 	
+	public void tirerUnMissileDepuisUnEnvahisseur(Envahisseur envahisseur, Dimension dimension, int vitesse) {
+
+		Missile missileTire = envahisseur.tirerUnMissile(dimension, vitesse);
+		
+		if(!this.aUnMissileDesEnvahisseursQuiOccupeLEspace(missileTire)) {
+			this.listeMissilesEnvahisseurs.add(missileTire);
+		}
+	}
+	
+	private boolean aUnMissileDesEnvahisseursQuiOccupeLEspace(Missile missileTire) {
+		boolean missileDejaPresent = false;
+		int i = 0;
+		
+		while(i<this.listeMissilesEnvahisseurs.size() && !missileDejaPresent) {
+			if(Collision.detecterCollision(missileTire, this.listeMissilesEnvahisseurs.get(i))) {
+				missileDejaPresent = true;
+			}
+			
+			i++;
+		}
+		return missileDejaPresent;
+	}
+	
+	public void deplacerMissilesDesEnvahisseurs() {
+		
+		for(int i=0; i<this.listeMissilesEnvahisseurs.size(); i++) {
+			this.listeMissilesEnvahisseurs.get(i).deplacerVerticalementVers(Direction.BAS_ECRAN);
+			
+			if(!this.estDansEspaceJeu(this.listeMissilesEnvahisseurs.get(i).abscisseLaPlusAGauche(), this.listeMissilesEnvahisseurs.get(i).ordonneeLaPlusBasse())){
+				this.listeMissilesEnvahisseurs.remove(i);
+			}
+		}
+		
+	}
+
+	public boolean aDesMissilesDesEnvahisseurs() {
+		return !this.listeMissilesEnvahisseurs.isEmpty();
+	}
+
+	public List<Missile> recupererListeMissilesDesEnvahisseurs() {
+		return this.listeMissilesEnvahisseurs;
+	}
+	
 	public void augmenterScore(int pointsGagnes) {
 		if(pointsGagnes <= 0) {
 			throw new IllegalArgumentException("Points attendus doivent être supérieurs à 0");
@@ -260,9 +296,26 @@ public class SpaceInvaders implements Jeu {
 		return ((x >= 0) && (x < this.longueur)) && ((y >= 0) && (y < this.hauteur));
 	}
 	
+	private boolean aUnMissileQuiOccupeLaPosition(int x, int y) {
+		
+		for (Missile missile : this.listeMissilesVaisseau) {
+			if(missile.occupeLaPosition(x, y)) {
+				return true;
+			}
+		}
+		
+		for (Missile missile : this.listeMissilesEnvahisseurs) {
+			if(missile.occupeLaPosition(x, y)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public void verifierCollisionsMissileEtEnvahisseur() {
 		
-		for (Iterator<Missile> iteratorMissiles = this.listeMissiles.iterator(); iteratorMissiles.hasNext();) {
+		for (Iterator<Missile> iteratorMissiles = this.listeMissilesVaisseau.iterator(); iteratorMissiles.hasNext();) {
 		    Missile missile = iteratorMissiles.next();
 		    
 		    for (Iterator<Envahisseur> iteratorEnvahisseurs = this.listeEnvahisseurs.iterator(); iteratorEnvahisseurs.hasNext();) {
@@ -301,14 +354,14 @@ public class SpaceInvaders implements Jeu {
 		this.deplacerVaisseau(commandeUser);
 
 		if (commandeUser.tir) {
-			this.tirerUnMissile(
+			this.tirerUnMissileDepuisVaisseau(
 					new Dimension(Constantes.MISSILE_VAISSEAU_LONGUEUR, Constantes.MISSILE_VAISSEAU_HAUTEUR),
 					Constantes.MISSILE_VAISSEAU_VITESSE);
 			
 		}
 		
-		if(this.aDesMissiles()) {
-			this.deplacerMissile();
+		if(this.aDesMissilesDuVaisseau()) {
+			this.deplacerMissilesDuVaisseau();
 		}
 		
 		if(this.aDesEnvahisseurs()) {

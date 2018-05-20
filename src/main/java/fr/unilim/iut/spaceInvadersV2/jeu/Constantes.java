@@ -14,10 +14,16 @@ public class Constantes {
 	public static final int MISSILE_VAISSEAU_HAUTEUR = 10;
 	public static final int MISSILE_VAISSEAU_VITESSE = 10;
 	
+	public static final int MISSILE_ENVAHISSEUR_LONGUEUR = 4;
+	public static final int MISSILE_ENVAHISSEUR_HAUTEUR = 10;
+	public static final int MISSILE_ENVAHISSEUR_VITESSE = 10;
+	
 	public static final int ENVAHISSEUR_LONGUEUR = 20;
 	public static final int ENVAHISSEUR_HAUTEUR = 20;
 	public static final int ENVAHISSEUR_VITESSE = 4;
 	public static final int ENVAHISSEUR_ESPACE_HORIZONTALE = 10;
+	
+	public static final int CHANCE_TIR_ENVAHISSEUR = 20;
 	
 	public static final int POINTS_PAR_ENVAHISSEUR = 10;
 	

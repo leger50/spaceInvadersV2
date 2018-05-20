@@ -733,11 +733,11 @@ public class SpaceInvadersTest {
    }
 	
 	/*S11
-	 * TODO : refactor missile : donner direction verticale (pour les différencier) -> Done
 	 * TODO : permettre le tir à l'envahisseur -> Done
-	 * TODO : tir automatique
-	 * TODO : tir aléatoire
+	 * TODO : tir automatique -> Done
+	 * TODO : tir aléatoire -> Done
 	 * TODO : verifier la fin de partie (si collision entre MissileEnvahisseur et Vaisseau)
+	 * TODO : ajouter une limite de missiles pour le vaisseau et les envahisseurs (2)
 	 * difficulté a - établir les tests : random pour le choix de l'envahisseur
 	 * 				- choisir une option (2 listes ou direction ?)
 	 */

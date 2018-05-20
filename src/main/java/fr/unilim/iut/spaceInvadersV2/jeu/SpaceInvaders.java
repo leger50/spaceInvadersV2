@@ -3,6 +3,7 @@ package fr.unilim.iut.spaceInvadersV2.jeu;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import fr.unilim.iut.spaceInvadersV2.moteurJeu.Commande;
 import fr.unilim.iut.spaceInvadersV2.moteurJeu.Jeu;
@@ -237,6 +238,26 @@ public class SpaceInvaders implements Jeu {
 		return this.listeEnvahisseurs;
 	}
 	
+	public void tirerUnMissileDepuisLesEnvahisseurs(Dimension dimension, int vitesse) {
+		
+		if(this.aDesEnvahisseurs() && this.lesEnvahisseursTirent()) {
+			
+			int choixEnvahisseur = choisirUnEnvahisseur();
+			this.tirerUnMissileDepuisUnEnvahisseur(this.listeEnvahisseurs.get(choixEnvahisseur), dimension, vitesse);
+		}
+	}
+	
+	private boolean lesEnvahisseursTirent() {
+		Random nbAleatoire = new Random();
+		
+		return nbAleatoire.nextInt(100) < Constantes.CHANCE_TIR_ENVAHISSEUR;
+	}
+
+	private int choisirUnEnvahisseur() {
+		Random nbAleatoire = new Random();
+		return nbAleatoire.nextInt(this.listeEnvahisseurs.size());
+	}
+	
 	public void tirerUnMissileDepuisUnEnvahisseur(Envahisseur envahisseur, Dimension dimension, int vitesse) {
 
 		Missile missileTire = envahisseur.tirerUnMissile(dimension, vitesse);
@@ -364,9 +385,17 @@ public class SpaceInvaders implements Jeu {
 			this.deplacerMissilesDuVaisseau();
 		}
 		
+		if(this.aDesMissilesDesEnvahisseurs()) {
+			this.deplacerMissilesDesEnvahisseurs();
+		}
+		
 		if(this.aDesEnvahisseurs()) {
 			this.deplacerEnvahisseur();
 		}
+		
+		this.tirerUnMissileDepuisLesEnvahisseurs(
+				new Dimension(Constantes.MISSILE_ENVAHISSEUR_LONGUEUR, Constantes.MISSILE_ENVAHISSEUR_HAUTEUR), 
+				Constantes.MISSILE_ENVAHISSEUR_VITESSE);
 		
 		this.verifierCollisionsMissileEtEnvahisseur();
 		

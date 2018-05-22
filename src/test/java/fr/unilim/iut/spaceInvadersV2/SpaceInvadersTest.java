@@ -732,11 +732,27 @@ public class SpaceInvadersTest {
        "...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
    }
 	
+	@Test
+	public void test_PartieTerminee_SiMissileEnvahisseurToucheVaisseau() {
+		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(5, 9), 1);
+		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(6, 1), 1);
+		
+		Envahisseur envahisseur = spaceInvaders.recupererListeEnvahisseurs().get(0);
+		spaceInvaders.tirerUnMissileDepuisUnEnvahisseur(envahisseur, new Dimension(1, 2), 1);
+		
+		for (int i = 0; i < 5; i++) {
+			spaceInvaders.deplacerMissilesDesEnvahisseurs();
+		}
+
+		spaceInvaders.verifierEtatDeLaPartie();
+		assertTrue(spaceInvaders.etreFini());
+	}
+	
 	/*S11
 	 * TODO : permettre le tir à l'envahisseur -> Done
 	 * TODO : tir automatique -> Done
 	 * TODO : tir aléatoire -> Done
-	 * TODO : verifier la fin de partie (si collision entre MissileEnvahisseur et Vaisseau)
+	 * TODO : verifier la fin de partie (si collision entre MissileEnvahisseur et Vaisseau) -> Done
 	 * TODO : ajouter une limite de missiles pour le vaisseau et les envahisseurs (2)
 	 * difficulté a - établir les tests : random pour le choix de l'envahisseur
 	 * 				- choisir une option (2 listes ou direction ?)

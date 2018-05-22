@@ -24,8 +24,6 @@ public class SpaceInvaders implements Jeu {
 	private List<Envahisseur> listeEnvahisseurs;
 	
 	private int score;
-	
-	private boolean estFini;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
@@ -37,7 +35,6 @@ public class SpaceInvaders implements Jeu {
 		this.listeEnvahisseurs = new ArrayList<>();
 		
 		this.score = 0;
-		this.estFini = false;
 	}
 
 	public void positionnerUnNouveauVaisseau(Dimension dimension, Position position, int vitesse) {
@@ -415,18 +412,12 @@ public class SpaceInvaders implements Jeu {
 		
 		this.verifierCollisionsMissileEtEnvahisseur();
 		
-		this.verifierEtatDeLaPartie();
-		
 
-	}
-	
-	public void verifierEtatDeLaPartie() {
-		this.estFini = this.collisionsMissileEnvahisseurEtVaisseau();
 	}
 
 	@Override
 	public boolean etreFini() {
-		return this.estFini;
+		return this.collisionsMissileEnvahisseurEtVaisseau();
 	}
 	
 	public String recupererEspaceJeuDansChaineASCII() {

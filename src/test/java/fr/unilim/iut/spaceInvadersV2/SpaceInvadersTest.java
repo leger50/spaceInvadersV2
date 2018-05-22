@@ -744,7 +744,6 @@ public class SpaceInvadersTest {
 			spaceInvaders.deplacerMissilesDesEnvahisseurs();
 		}
 
-		spaceInvaders.verifierEtatDeLaPartie();
 		assertTrue(spaceInvaders.etreFini());
 	}
 	

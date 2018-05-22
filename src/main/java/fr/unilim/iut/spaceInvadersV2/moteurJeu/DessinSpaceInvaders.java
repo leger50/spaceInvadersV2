@@ -54,6 +54,10 @@ public class DessinSpaceInvaders implements DessinJeu{
 		
 		this.dessinerUnScore(this.spaceInvaders.obtenirScore(), image);
 		
+		if(this.spaceInvaders.etreFini()) {
+			this.dessinerUneFindePartie(this.spaceInvaders.obtenirScore(), image);
+		}
+		
 	}
 	
 	private void dessinerUnFond(BufferedImage image) {
@@ -99,6 +103,20 @@ public class DessinSpaceInvaders implements DessinJeu{
 		dessinScore.setColor(Color.green);
 		dessinScore.setFont(new Font("Snap ITC", Font.BOLD, 20));
 		dessinScore.drawString("Score : " + score, Constantes.SCORE_AFFICHAGE_X, Constantes.SCORE_AFFICHAGE_Y);
+
+	}
+	
+	private void dessinerUneFindePartie(int score, BufferedImage image) {
+		this.dessinerUnFond(image);
+		
+		Graphics2D dessinMessageFin = (Graphics2D) image.getGraphics();
+
+		dessinMessageFin.setColor(Color.red);
+		dessinMessageFin.setFont(new Font("Snap ITC", Font.PLAIN, 20));
+		dessinMessageFin.drawString("Game Over", Constantes.ESPACEJEU_LONGUEUR/3,Constantes.ESPACEJEU_HAUTEUR/2);
+		
+		dessinMessageFin.setColor(Color.green);
+		dessinMessageFin.drawString("Score : " + score, Constantes.SCORE_AFFICHAGE_X, Constantes.SCORE_AFFICHAGE_Y);
 
 	}
 

@@ -93,6 +93,10 @@ public class SpaceInvaders implements Jeu {
 	public Vaisseau recupererLeVaisseau() {
 		return this.vaisseau;
 	}
+	
+	public boolean autoriserTirDepuisVaisseau() {
+		return this.listeMissilesVaisseau.size() < Constantes.MISSILE_VAISSEAU_LIMITE;
+	}
 
 	public void tirerUnMissileDepuisVaisseau(Dimension dimension, int vitesse) {
 
@@ -236,6 +240,10 @@ public class SpaceInvaders implements Jeu {
 
 	public List<Envahisseur> recupererListeEnvahisseurs() {
 		return this.listeEnvahisseurs;
+	}
+	
+	public boolean autoriserTirDepuisLesEnvahisseurs() {
+		return this.listeMissilesEnvahisseurs.size() < Constantes.MISSILE_ENVAHISSEUR_LIMITE;
 	}
 	
 	public void tirerUnMissileDepuisLesEnvahisseurs(Dimension dimension, int vitesse) {
@@ -387,7 +395,7 @@ public class SpaceInvaders implements Jeu {
 		
 		this.deplacerVaisseau(commandeUser);
 
-		if (commandeUser.tir) {
+		if (commandeUser.tir && this.autoriserTirDepuisVaisseau()) {
 			this.tirerUnMissileDepuisVaisseau(
 					new Dimension(Constantes.MISSILE_VAISSEAU_LONGUEUR, Constantes.MISSILE_VAISSEAU_HAUTEUR),
 					Constantes.MISSILE_VAISSEAU_VITESSE);
@@ -406,12 +414,13 @@ public class SpaceInvaders implements Jeu {
 			this.deplacerEnvahisseur();
 		}
 		
-		this.tirerUnMissileDepuisLesEnvahisseurs(
-				new Dimension(Constantes.MISSILE_ENVAHISSEUR_LONGUEUR, Constantes.MISSILE_ENVAHISSEUR_HAUTEUR), 
-				Constantes.MISSILE_ENVAHISSEUR_VITESSE);
+		if(this.autoriserTirDepuisLesEnvahisseurs()) {
+			this.tirerUnMissileDepuisLesEnvahisseurs(
+					new Dimension(Constantes.MISSILE_ENVAHISSEUR_LONGUEUR, Constantes.MISSILE_ENVAHISSEUR_HAUTEUR), 
+					Constantes.MISSILE_ENVAHISSEUR_VITESSE);
+		}
 		
 		this.verifierCollisionsMissileEtEnvahisseur();
-		
 
 	}
 

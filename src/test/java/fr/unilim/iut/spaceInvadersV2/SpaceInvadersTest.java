@@ -747,13 +747,42 @@ public class SpaceInvadersTest {
 		assertTrue(spaceInvaders.etreFini());
 	}
 	
-	/*S11
-	 * TODO : permettre le tir à l'envahisseur -> Done
-	 * TODO : tir automatique -> Done
-	 * TODO : tir aléatoire -> Done
-	 * TODO : verifier la fin de partie (si collision entre MissileEnvahisseur et Vaisseau) -> Done
-	 * TODO : ajouter une limite de missiles pour le vaisseau et les envahisseurs (2)
-	 * difficulté a - établir les tests : random pour le choix de l'envahisseur
-	 * 				- choisir une option (2 listes ou direction ?)
-	 */
+	@Test
+    public void test_LimiteDeTirDepuisVaisseau() {
+	  int limiteMissilesVaisseau = Constantes.MISSILE_VAISSEAU_LIMITE;
+	  
+	  spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3,2),new Position(5,9), 2);
+	  spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1,2),2);
+	  
+	  for (int i = 0; i < limiteMissilesVaisseau +1; i++) {
+		  spaceInvaders.deplacerVaisseauVersLaDroite();
+		  
+		  if(spaceInvaders.autoriserTirDepuisVaisseau()) {
+			  spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1,2),2);
+		  }
+	  }
+	  
+      assertEquals(limiteMissilesVaisseau, this.spaceInvaders.recupererListeMissilesDuVaisseau().size());
+    }
+	
+	@Test
+    public void test_LimiteDeTirDepuisLesEnvahisseurs() {
+	  int limiteMissilesEnvahisseurs = Constantes.MISSILE_ENVAHISSEUR_LIMITE;
+	  
+	  spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(3,2),new Position(6,1), 2);
+	  
+	  Envahisseur envahisseur = spaceInvaders.recupererListeEnvahisseurs().get(0);
+	  spaceInvaders.tirerUnMissileDepuisUnEnvahisseur(envahisseur, new Dimension(1, 2), 1);
+	  
+	  for (int i = 0; i < limiteMissilesEnvahisseurs +1; i++) {
+		  spaceInvaders.deplacerEnvahisseur();
+		  
+		  if(spaceInvaders.autoriserTirDepuisLesEnvahisseurs()) {
+			  spaceInvaders.tirerUnMissileDepuisUnEnvahisseur(envahisseur, new Dimension(1, 2), 1);
+		  }
+	  }
+	  
+      assertEquals(limiteMissilesEnvahisseurs, this.spaceInvaders.recupererListeMissilesDesEnvahisseurs().size());
+    }
+
 }

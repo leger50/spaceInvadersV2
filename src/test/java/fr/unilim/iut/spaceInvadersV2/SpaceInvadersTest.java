@@ -764,25 +764,4 @@ public class SpaceInvadersTest {
 	  
       assertEquals(limiteMissilesVaisseau, this.spaceInvaders.recupererListeMissilesDuVaisseau().size());
     }
-	
-	@Test
-    public void test_LimiteDeTirDepuisLesEnvahisseurs() {
-	  int limiteMissilesEnvahisseurs = Constantes.MISSILE_ENVAHISSEUR_LIMITE;
-	  
-	  spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(3,2),new Position(6,1), 2);
-	  
-	  Envahisseur envahisseur = spaceInvaders.recupererListeEnvahisseurs().get(0);
-	  spaceInvaders.tirerUnMissileDepuisUnEnvahisseur(envahisseur, new Dimension(1, 2), 1);
-	  
-	  for (int i = 0; i < limiteMissilesEnvahisseurs +1; i++) {
-		  spaceInvaders.deplacerEnvahisseur();
-		  
-		  if(spaceInvaders.autoriserTirDepuisLesEnvahisseurs()) {
-			  spaceInvaders.tirerUnMissileDepuisUnEnvahisseur(envahisseur, new Dimension(1, 2), 1);
-		  }
-	  }
-	  
-      assertEquals(limiteMissilesEnvahisseurs, this.spaceInvaders.recupererListeMissilesDesEnvahisseurs().size());
-    }
-
 }

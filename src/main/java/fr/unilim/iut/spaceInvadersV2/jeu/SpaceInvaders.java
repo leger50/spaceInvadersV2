@@ -242,10 +242,6 @@ public class SpaceInvaders implements Jeu {
 		return this.listeEnvahisseurs;
 	}
 	
-	public boolean autoriserTirDepuisLesEnvahisseurs() {
-		return this.listeMissilesEnvahisseurs.size() < Constantes.MISSILE_ENVAHISSEUR_LIMITE;
-	}
-	
 	public void tirerUnMissileDepuisLesEnvahisseurs(Dimension dimension, int vitesse) {
 		
 		if(this.aDesEnvahisseurs() && this.lesEnvahisseursTirent()) {
@@ -414,11 +410,9 @@ public class SpaceInvaders implements Jeu {
 			this.deplacerEnvahisseur();
 		}
 		
-		if(this.autoriserTirDepuisLesEnvahisseurs()) {
-			this.tirerUnMissileDepuisLesEnvahisseurs(
-					new Dimension(Constantes.MISSILE_ENVAHISSEUR_LONGUEUR, Constantes.MISSILE_ENVAHISSEUR_HAUTEUR), 
-					Constantes.MISSILE_ENVAHISSEUR_VITESSE);
-		}
+		this.tirerUnMissileDepuisLesEnvahisseurs(
+				new Dimension(Constantes.MISSILE_ENVAHISSEUR_LONGUEUR, Constantes.MISSILE_ENVAHISSEUR_HAUTEUR), 
+				Constantes.MISSILE_ENVAHISSEUR_VITESSE);
 		
 		this.verifierCollisionsMissileEtEnvahisseur();
 

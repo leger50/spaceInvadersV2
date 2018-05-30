@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.unilim.iut.spaceInvadersV2.jeu.Constantes;
@@ -399,64 +398,6 @@ public class SpaceInvadersTest {
 		"...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
 	}
 	
-	@Ignore
-	@Test
-	public void test_EnvahisseurDeplacement_ChangementDirectionVersLaGauche() {
-		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2,2),new Position(12,1), 1);
-		
-		for (int i = 0; i < 3; i++) {
-			spaceInvaders.deplacerEnvahisseurs();
-		}
-		
-		assertEquals("" + 
-		"............EE.\n" + 
-		"............EE.\n" +
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
-	}
-	
-	@Ignore
-	@Test
-	public void test_EnvahisseurDeplacement_ChangementDirectionVersLaDroite() {
-		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2,2),new Position(12,1), 1);
-		
-		for (int i = 0; i < 17; i++) {
-			spaceInvaders.deplacerEnvahisseurs();
-		}
-		
-		assertEquals("" + 
-		".EE............\n" + 
-		".EE............\n" +
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" + 
-		"...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
-	}
-	
-	@Ignore("La partie ne se termine plus de cette façon")
-	@Test
-	public void test_PartieTerminee_SiMissileVaisseauToucheEnvahisseur() {
-		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(3, 9), 1);
-		spaceInvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(4, 1), 1);
-		
-		spaceInvaders.tirerUnMissileDepuisVaisseau(new Dimension(1, 2), 1);
-		for (int i = 0; i < 5; i++) {
-			spaceInvaders.deplacerMissilesDuVaisseau();
-		}
-
-		assertTrue(spaceInvaders.etreFini());
-	}
-	
 	@Test
 	public void test_TirerPlusieursMissilesSansChevauchement() {
 		spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(5, 9), 2);
@@ -571,48 +512,6 @@ public class SpaceInvadersTest {
 		assertEquals("" + 
 				"..EE...EE...EE.\n" + 
 				"..EE...EE...EE.\n" +
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
-	}
-	
-	@Ignore
-	@Test
-	public void test_PlacerUneLigneDEnvahisseur_DeplacementChangementDirectionVersLaGauche() {
-		spaceInvaders.placerLigneEnvahisseurs(new Dimension(2, 2), 1, 1, 3);
-		
-		for (int i = 0; i < 6; i++) {
-			spaceInvaders.deplacerEnvahisseurs();
-		}		
-		assertEquals("" + 
-				".EE...EE...EE..\n" + 
-				".EE...EE...EE..\n" +
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" + 
-				"...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
-	}
-	
-	@Ignore
-	@Test
-	public void test_PlacerUneLigneDEnvahisseur_DeplacementChangementDirectionVersLaDroite() {
-		spaceInvaders.placerLigneEnvahisseurs(new Dimension(2, 2), 1, 1, 3);
-		
-		for (int i = 0; i < 9; i++) {
-			spaceInvaders.deplacerEnvahisseurs();
-		}		
-		assertEquals("" + 
-				".EE...EE...EE..\n" + 
-				".EE...EE...EE..\n" +
 				"...............\n" + 
 				"...............\n" + 
 				"...............\n" + 

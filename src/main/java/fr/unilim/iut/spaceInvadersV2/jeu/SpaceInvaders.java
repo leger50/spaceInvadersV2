@@ -214,7 +214,6 @@ public class SpaceInvaders implements Jeu {
 		return envahisseurDejaPresent;
 	}
 
-	//refactor
 	public void deplacerEnvahisseurs() {
 
 		boolean horsZone = deplacerEnvahisseursHorizontalement();
@@ -414,9 +413,6 @@ public class SpaceInvaders implements Jeu {
 				Constantes.ENVAHISSEUR_VITESSE, Constantes.ENVAHISSEURS_ESPACE_HORIZONTALE, 
 				Constantes.ENVAHISSEURS_ESPACE_VERTICALE, Constantes.ENVAHISSEURS_NOMBRE_LIGNES);
 
-		/*this.placerLigneEnvahisseurs(new Dimension(Constantes.ENVAHISSEUR_LONGUEUR, Constantes.ENVAHISSEUR_HAUTEUR),
-				Constantes.ENVAHISSEUR_VITESSE, Constantes.ENVAHISSEUR_HAUTEUR - 1,
-				Constantes.ENVAHISSEURS_ESPACE_HORIZONTALE);*/
 	}
 
 	private void deplacerVaisseau(Commande commandeUser) {

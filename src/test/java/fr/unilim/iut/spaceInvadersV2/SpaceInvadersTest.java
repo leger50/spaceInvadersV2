@@ -764,4 +764,5 @@ public class SpaceInvadersTest {
 	  
       assertEquals(limiteMissilesVaisseau, this.spaceInvaders.recupererListeMissilesDuVaisseau().size());
     }
+	
 }

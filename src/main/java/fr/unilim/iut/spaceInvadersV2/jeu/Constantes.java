@@ -26,6 +26,7 @@ public class Constantes {
 	public static final int ENVAHISSEURS_ESPACE_HORIZONTALE = 20;
 	public static final int ENVAHISSEURS_ESPACE_VERTICALE = 10;
 	public static final int ENVAHISSEURS_NOMBRE_LIGNES = 3;
+	public static final int ENVAHISSEURS_NOMBRE_PAR_LIGNES = 10;
 	
 	public static final int CHANCE_TIR_ENVAHISSEUR = 10;
 	

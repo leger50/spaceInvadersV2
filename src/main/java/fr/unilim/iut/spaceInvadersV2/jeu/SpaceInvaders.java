@@ -21,7 +21,7 @@ public class SpaceInvaders implements Jeu {
 	private List<Missile> listeMissilesVaisseau;
 	private List<Missile> listeMissilesEnvahisseurs;
 
-	private List<Envahisseur> listeEnvahisseurs;
+	private Horde hordeEnvahisseur;
 
 	private int score;
 
@@ -32,7 +32,7 @@ public class SpaceInvaders implements Jeu {
 		this.listeMissilesVaisseau = new ArrayList<>();
 		this.listeMissilesEnvahisseurs = new ArrayList<>();
 
-		this.listeEnvahisseurs = new ArrayList<>();
+		this.hordeEnvahisseur = new Horde();
 
 		this.score = 0;
 	}

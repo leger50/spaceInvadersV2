@@ -29,36 +29,33 @@ public class Horde {
 		this.espaceHorizontalEnvahisseur = espaceHorizontalEnvahisseur;
 		this.espaceVerticalEnvahisseur = espaceVerticalEnvahisseur;
 
-		this.initialiserHordeEnvahisseur();
-
 	}
 
-	private void initialiserHordeEnvahisseur() {
+	public void positionnerUneHordeEnvahisseurs() {
 
 		int positionOrdonnee = this.dimensionEnvahisseur.hauteur() - 1;
 
 		for (int i = 0; i < this.nombreLignes; i++) {
-			this.placerLigneEnvahisseurs(positionOrdonnee);
+			this.positionnerUneLigneEnvahisseurs(positionOrdonnee);
 
 			positionOrdonnee += this.dimensionEnvahisseur.hauteur() + this.espaceVerticalEnvahisseur;
 		}
 	}
 	
-	private void placerLigneEnvahisseurs(int ordonneePosition) {
+	public void positionnerUneLigneEnvahisseurs(int ordonneePosition) {
 
 		int abscisseEnvahisseur = 0;
 
 		for (int i = 0; i < this.nombreEnvahisseursParLigne; i++) {
-			this.positionnerUnNouveauEnvahisseur(dimensionEnvahisseur, new Position(abscisseEnvahisseur, ordonneePosition),
-					vitesseEnvahisseur);
+			this.positionnerUnEnvahisseur(new Position(abscisseEnvahisseur, ordonneePosition));
 			
 			abscisseEnvahisseur += this.dimensionEnvahisseur.longueur() + this.espaceHorizontalEnvahisseur;
 		}
 	}
 	
-	public void positionnerUnNouveauEnvahisseur(Dimension dimension, Position position, int vitesse) {
+	public void positionnerUnEnvahisseur(Position position) {
 
-		Envahisseur envahisseurAPlacer = new Envahisseur(dimension, position, vitesse);
+		Envahisseur envahisseurAPlacer = new Envahisseur(this.dimensionEnvahisseur, position, this.vitesseEnvahisseur);
 		this.listeEnvahisseurs.add(envahisseurAPlacer);
 	}
 	
@@ -69,7 +66,6 @@ public class Horde {
 			envahisseur.deplacerHorizontalementVers(envahisseur.direction());
 		}
 	}
-	
 	
 	public boolean lesEnvahisseursTirent() {
 		Random nbAleatoire = new Random();

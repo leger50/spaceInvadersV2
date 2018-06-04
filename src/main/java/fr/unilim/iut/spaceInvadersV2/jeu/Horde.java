@@ -87,6 +87,4 @@ public class Horde {
 		return !this.listeEnvahisseurs.isEmpty();
 	}
 	
-	//controler nb envahisseurs par ligne
-	//controler exception en dehoors espace
 }

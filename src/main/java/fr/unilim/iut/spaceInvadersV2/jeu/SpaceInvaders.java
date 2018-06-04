@@ -379,11 +379,15 @@ public class SpaceInvaders implements Jeu {
 		this.positionnerUnNouveauVaisseau(new Dimension(Constantes.VAISSEAU_LONGUEUR, Constantes.VAISSEAU_HAUTEUR),
 				new Position(this.longueur / 2, this.hauteur - 1), Constantes.VAISSEAU_VITESSE);
 
+		this.initialiserUneHorde();
+
+	}
+
+	private void initialiserUneHorde() {
 		this.placerHordeEnvahisseurs(new Dimension(Constantes.ENVAHISSEUR_LONGUEUR, Constantes.ENVAHISSEUR_HAUTEUR),
 				Constantes.ENVAHISSEUR_VITESSE, Constantes.ENVAHISSEURS_ESPACE_HORIZONTALE,
 				Constantes.ENVAHISSEURS_ESPACE_VERTICALE, Constantes.ENVAHISSEURS_NOMBRE_PAR_LIGNES,
 				Constantes.ENVAHISSEURS_NOMBRE_LIGNES);
-
 	}
 
 	private void deplacerVaisseau(Commande commandeUser) {
@@ -417,6 +421,8 @@ public class SpaceInvaders implements Jeu {
 
 		if (this.aDesEnvahisseurs()) {
 			this.deplacerEnvahisseurs();
+		}else {
+			this.initialiserUneHorde();
 		}
 
 		this.tirerUnMissileDepuisLesEnvahisseurs(

@@ -67,10 +67,10 @@ public class Horde {
 		}
 	}
 	
-	public boolean lesEnvahisseursTirent() {
+	public boolean lesEnvahisseursTirent(int pourcentageChanceTir) {
 		Random nbAleatoire = new Random();
 
-		return nbAleatoire.nextInt(100) < Constantes.CHANCE_TIR_ENVAHISSEUR;
+		return nbAleatoire.nextInt(100) < pourcentageChanceTir;
 	}
 	
 	public Envahisseur choisirUnEnvahisseur() {

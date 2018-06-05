@@ -144,48 +144,6 @@ public class SpaceInvaders implements Jeu {
 		return this.listeMissilesVaisseau;
 	}
 
-	public void placerUnEnvahisseur(Dimension dimensionEnvahisseur, Position positionEnvahisseur,
-			int vitesseEnvahisseur) {
-		
-		int x = positionEnvahisseur.abscisse();
-		int y = positionEnvahisseur.ordonnee();
-
-		if (!this.estDansEspaceJeu(x, y)) {
-			throw new HorsEspaceJeuException("La position de l'envahisseur est en dehors de l'espace jeu");
-		}
-
-		int longueurEnvahisseur = dimensionEnvahisseur.longueur();
-		int hauteurEnvahisseur = dimensionEnvahisseur.hauteur();
-
-		if (!this.estDansEspaceJeu(x + longueurEnvahisseur - 1, y)) {
-			throw new DebordementEspaceJeuException(
-					"L'envahisseur déborde de l'espace jeu vers la droite à cause de sa longueur");
-		}
-		if (!this.estDansEspaceJeu(x, y - hauteurEnvahisseur + 1)) {
-			throw new DebordementEspaceJeuException(
-					"L'envahisseur déborde de l'espace jeu vers le bas à cause de sa hauteur");
-		}
-		
-		this.hordeEnvahisseur = new Horde(dimensionEnvahisseur, vitesseEnvahisseur, 0, 0, 1, 1);
-		this.hordeEnvahisseur.positionnerUnEnvahisseur(positionEnvahisseur);
-	}
-
-	public void placerLigneEnvahisseurs(int numeroLigne, int nombreEnvahisseursParLigne,
-			int espaceHorizontalEnvahisseur, Dimension dimensionEnvahisseur, int vitesseEnvahisseur) {
-
-		int ligneMinimum = dimensionEnvahisseur.hauteur() -1;
-		int ligneMaximum = this.hauteur - dimensionEnvahisseur.hauteur();
-		
-		if(numeroLigne < ligneMinimum || numeroLigne > ligneMaximum) {
-			throw new DebordementEspaceJeuException("La taille de l'envahisseur est trop grande pour ce numéro de ligne");
-		}
-		
-		this.hordeEnvahisseur = new Horde(dimensionEnvahisseur, vitesseEnvahisseur, espaceHorizontalEnvahisseur, 0,
-				nombreEnvahisseursParLigne, 1);
-		this.hordeEnvahisseur.positionnerUneLigneEnvahisseurs(numeroLigne);
-
-	}
-
 	public void placerHordeEnvahisseurs(Dimension dimensionEnvahisseur, int vitesseEnvahisseur,
 			int espaceHorizontalEnvahisseur, int espaceVerticalEnvahisseur, int nombreEnvahisseursParLigne,
 			int nombreDeLignes) {
@@ -260,9 +218,9 @@ public class SpaceInvaders implements Jeu {
 		return this.hordeEnvahisseur.recupererLesEnvahisseurs();
 	}
 
-	public void tirerUnMissileDepuisLesEnvahisseurs(Dimension dimension, int vitesse) {
+	public void tirerUnMissileDepuisLesEnvahisseurs(Dimension dimension, int vitesse, int pourcentageTirEnvahisseurs) {
 
-		if (this.aDesEnvahisseurs() && this.hordeEnvahisseur.lesEnvahisseursTirent()) {
+		if (this.aDesEnvahisseurs() && this.hordeEnvahisseur.lesEnvahisseursTirent(pourcentageTirEnvahisseurs)) {
 
 			Envahisseur envahisseurChoisi = this.hordeEnvahisseur.choisirUnEnvahisseur();
 			Missile missileTire = envahisseurChoisi.tirerUnMissile(dimension, vitesse);
@@ -427,7 +385,7 @@ public class SpaceInvaders implements Jeu {
 
 		this.tirerUnMissileDepuisLesEnvahisseurs(
 				new Dimension(Constantes.MISSILE_ENVAHISSEUR_LONGUEUR, Constantes.MISSILE_ENVAHISSEUR_HAUTEUR),
-				Constantes.MISSILE_ENVAHISSEUR_VITESSE);
+				Constantes.MISSILE_ENVAHISSEUR_VITESSE, Constantes.CHANCE_TIR_ENVAHISSEUR);
 
 		this.verifierCollisionsMissileEtEnvahisseur();
 
